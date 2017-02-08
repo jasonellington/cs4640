@@ -1,0 +1,90 @@
+<!doctype html>
+<!--
+Author: Jason Ellington
+-->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>in-class 2: HTML</title>
+    <!-- Your page must include the following items. Feel free to design, layout, and utilize these items the way you like.
+    Links — such as a link to your favorite website or blog
+    Images — such as your pictures, your favorite pictures, or logos
+    Tables — this is very useful for layout or displaying contents
+    Forms — such as a user login to access certain parts of your website, or for subscriber
+    Contact information — at least a link with an email embedded (you may leave a subject blank) such that clicking a link opens a window ready for a user to type their message and send an email to you.
+    Radio button, checkbox, or drop down — your design decision should be based on the purpose and the number of options. You are required to use at least one of these items. -->
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Hi, I am Jason Ellington</h1>
+    <h2>This is me fishing:</h2>
+    <img src="http://jasonellington.com/images/profile.jpg" alt="Fish" style="width:304px;height:228px;">
+    <h1></h1>
+    <a href="https://www.facebook.com/Jason.Ellington">Find me on Facebook</a>
+    <h2>Table of Countries I've Been: </h2>
+    <table>
+        <tr>
+            <th>Country</th>3
+            <th>Date</th>
+        </tr>
+        <tr>
+            <td>Italy</td>
+            <td>March 2016</td>
+        </tr>
+        <tr>
+            <td>Ireland</td>
+            <td>March 2016</td>
+        </tr>
+        <tr>
+            <td>United States</td>
+            <td>March 1995</td>
+        </tr>
+
+    </table>
+
+
+    <form action="login.jsp" method="post">
+        Username:
+        <input type="text" name="username" required="true" /> Password:
+        <input type="text" name="pwd" />
+        <button type="submit" value="Submit" title="This button won't work. No implementation has been done.">Login</button>
+        <button type="reset" value="Reset" title="This button also won't work.">Reset</button>
+    </form>
+
+
+    <h2>What is your favorite Animal: </h2>
+    <form action="">
+        <input type="radio" name="animal" value="dog"> Dog
+        <br>
+        <input type="radio" name="animal" value="cat"> Cat
+        <br>
+        <input type="radio" name="animal" value="none"> None
+    </form>
+
+
+    <p><a href="mailto:jason.t.ellington@gmail.com">Email Me</a>
+    </p>
+    <!-- this is a comment: browser renders the content of the body element -->
+</body>
+
+</html>

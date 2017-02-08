@@ -1,0 +1,104 @@
+<!doctype html>
+<!--
+Author: Jason Ellington, Madeline Watkins
+-->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 2</title>
+</head>
+
+<body>
+    <p>Click the button to trigger a function that will output "Hello World" in a p element with id="demo".</p>
+
+    <button onclick="myFunction()">Click me</button>
+
+
+    <h1>Questions!</h1>
+    <p>This page allows you to create different types of questions. enjoy!</p>
+
+    <h2>Choose Question Type:</h2>
+
+    <div class="create-question" data-target=".question-type">
+        <form>
+            <select class="select-question">
+                <option> -Choose Type- </option>
+                <option value="mc" data-show=".mc" onclick="myFunction()">Multiple Choice</option>
+                <option value="tf" data-show=".tf">True/False</option>
+                <option value="sa" data-show=".sa">Short Answer</option>
+            </select>
+        </form>
+    </div>
+
+    <!-- I was hoping to get this to pop up when u select multiple choice, like it does when you click the button -->
+    <p id="demo"></p>
+
+    <script>
+        function myFunction() {
+            document.getElementById("demo").innerHTML = "Hello World";
+        }
+    </script>
+
+
+    <div class="question-type">
+        <div class="mc hide">
+            <p>MC question</p>
+            <form>
+                Question:
+                <input type="text" name="question" />
+                <ul class="answers">
+                    Answer 1:
+                    <input type="text" name="q1" value="" id="q1a">
+                    <br/> Answer 2:
+                    <input type="text" name="q1" value="" id="q1b">
+                    <br/> Answer 3:
+                    <input type="text" name="q1" value="" id="q1c">
+                    <br/> Answer 4:
+                    <input type="text" name="q1" value="" id="q1d">
+                    <br/>
+                </ul>
+                <button type="submit" value="Submit">Submit</button>
+            </form>
+        </div>
+        <div class="tf hide">
+            <p>TF question</p>
+            <form>
+                Question:
+                <input type="text" name="question" />
+                <ul class="answers">
+                    True:
+                    <input type="text" name="q1t" value="" id="q1t">
+                    <br/> False:
+                    <input type="text" name="q1f" value="" id="q1f">
+                </ul>
+                <button type="submit" value="Submit">Submit</button>
+            </form>
+        </div>
+        <div class="sa hide">
+            <p>SA question</p>
+            <form>
+                Question:
+                <input type="text" name="question" /> Answer:
+                <textarea class="form-control" rows="4" name="answer"></textarea>
+                <button type="submit" value="Submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).on('change', '.select-question', function () {
+            var target = $(this).data('target');
+            var show = $("option:selected", this).data('show');
+            $(target).children().addClass('hide');
+            $(show).removeClass('hide');
+        });
+        $(document).ready(function () {
+            $('.div-toggle').trigger('change');
+        });
+    </script>
+
+</body>
+
+</html>
