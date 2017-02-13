@@ -15,65 +15,41 @@
       <td align="center"><string>Value</string></td>
     </tr>
     <tr>
-      <td width="20%">MAILTO</td> 
-      <td><?php echo $_POST['MAILTO']?></td>      
+      <td width="20%">MC Question</td> 
+      <td><?php echo $_POST['mcQuestion']?></td>      
     </tr>
     <tr>
-      <td width="20%">FName</td> 
-      <td><?php echo $_POST['FName']?></td>      
+      <td width="20%">MC Answer A</td> 
+      <td><?php echo $_POST['MCa']?></td>      
     </tr>
     <tr>
-      <td width="20%">LName</td>
-      <td><?php echo $_POST['LName']?></td>      
+      <td width="20%">MC Answer B</td> 
+      <td><?php echo $_POST['MCb']?></td>      
     </tr>
     <tr>
-      <td width="20%">Major</td>
-      <td><?php echo $_POST['Major']?></td>      
+      <td width="20%">MC Answer C</td>
+      <td><?php echo $_POST['MCc']?></td>      
     </tr>
     <tr>
-      <td width="20%">OtherMajor</td>
-      <td><?php echo $_POST['OtherMajor']?></td>      
+      <td width="20%">MC Answer D</td>
+      <td><?php echo $_POST['MCd']?></td>      
     </tr>
     <tr>
-      <td width="20%">EmailAddress</td>
-      <td><?php echo $_POST['EmailAddress']?></td>      
+      <td width="20%">TF Question</td>
+      <td><?php echo $_POST['tfQuestion']?></td>      
     </tr>
     <tr>
-      <td width="20%">Phone</td>
-      <td><?php echo $_POST['Phone']?></td>      
+      <td width="20%">TF Answer</td>
+      <td><?php echo $_POST['TF']?></td>      
     </tr>
     <tr>
-      <td width="20%">WebSiteURL</td>
-      <td><?php echo $_POST['WebSiteURL']?></td>      
+      <td width="20%">SA Question</td>
+      <td><?php echo $_POST['saQuestion']?></td>      
     </tr>
     <tr>
-      <td width="20%">LevelHTML</td>
-      <td><?php echo $_POST['LevelHTML']?></td>      
-    </tr>
-    <tr>
-      <td width="20%">LevelJava</td>
-      <td><?php echo $_POST['LevelJava']?></td>      
-    </tr>
-    <tr>
-      <td width="20%">LevelJS</td>
-      <td><?php echo $_POST['LevelJS']?></td>      
-    </tr>
-    <tr>
-      <td width="20%">LevelServlets</td>
-      <td><?php echo $_POST['LevelServlets']?></td>      
-    </tr>
-    <tr>
-      <td width="20%">LevelJSP</td>
-      <td><?php echo $_POST['LevelJSP']?></td>      
-    </tr>
-    <tr>
-      <td width="20%">NewOrUpdate</td>
-      <td><?php echo $_POST['NewOrUpdate']?></td>      
-    </tr>
-    <tr>
-      <td width="20%">submit</td>
-      <td><?php echo $_POST['submit']?></td>      
-    </tr>    
+      <td width="20%">SA Answer</td>
+      <td><?php echo $_POST['saAnswer']?></td>      
+    </tr>  
   </table>
 
 </body>
