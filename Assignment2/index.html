@@ -14,6 +14,7 @@ Author: Jason Ellington, Madeline Watkins
     <h1>Questions!</h1>
     <p>Jason Ellington, Madeline Watkins</p>
     <p>This page allows you to create different types of questions. Enjoy!</p>
+    <p>Select Random for a random question and answer!</p>
 
     <h2>Choose Question Type:</h2>
         <select id="selectQuestion" onchange="update_screen()">
@@ -39,6 +40,7 @@ Author: Jason Ellington, Madeline Watkins
                 </ul>
                <button type="submit" value="Submit" onclick="validateInput()">Submit</button>
                 <button type="reset"  value="Reset" onclick="reset()">Clear</button>
+                <button type="random"  value="random" onclick="random()">Random</button>
         </form>
 
             <form id="true-false" style="display:none" method="post" action="formHandler.php" onSubmit="validateInput()">
@@ -50,6 +52,7 @@ Author: Jason Ellington, Madeline Watkins
                 </ul>
                 <button type="submit" value="Submit" onclick="validateInput()">Submit</button>
                 <button type="reset"  value="Reset" onclick="reset()">Clear</button>
+                <button type="random"  value="random" onclick="random()">Random</button>
             </form>
 
             <form id="short-answer" style="display:none" method="post" action="formHandler.php" onSubmit="validateInput()">
@@ -61,6 +64,7 @@ Author: Jason Ellington, Madeline Watkins
                 <br/>
                 <button type="submit" value="Submit" onclick="validateInput()">Submit</button>
                 <button type="reset"  value="Reset" onclick="reset()">Clear</button>
+                <button type="random"  value="Random" onclick="random()">Random</button>
             </form>
 
 
@@ -99,6 +103,25 @@ Author: Jason Ellington, Madeline Watkins
         else if (selected_value == "short-answer") {
             document.getElementById("saQuestion").value = "";
             document.getElementById("saAnswer").value = "";
+        }
+     }
+
+     function random() {
+        var selected_value = document.getElementById("selectQuestion").value;
+        if (selected_value == "multiple-choice") {
+            document.getElementById("MCa").value = "1820";
+            document.getElementById("MCb").value = "1819";
+            document.getElementById("MCc").value = "1816";
+            document.getElementById("MCd").value = "1817";
+            document.getElementById("mcQuestion").value = "What Year Was UVA Founded?";
+        }
+        else if (selected_value == "true-false") {
+            document.getElementById("tfQuestion").value = "Thomas Jefferson Was the 4th Prsident of the US";
+            document.getElementById("TF").value = "false";
+        }
+        else if (selected_value == "short-answer") {
+            document.getElementById("saQuestion").value = "What is the meaning of life?";
+            document.getElementById("saAnswer").value = "What makes the meaning of life is people, so you try to be good to people immediately around you and in your broader community. So a lot of my projects are about how I can affect the world in the hundreds of millions. Reid Hoffman";
         }
      }
 
