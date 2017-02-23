@@ -1,0 +1,163 @@
+<!doctype html>
+
+<html>
+
+  <head>
+    <meta charset="UTF-8">   
+    <title>CS 4640 (Programming Languages for Web Applications)</title>
+
+    <style>
+      a:hover
+      {
+        background-color:yellow;
+      }       
+    </style>
+
+   <script type="text/javascript">
+     <!--  // Hide script from old browsers 
+      
+     function setFocus() {
+     	document.userInfo.username.focus();
+    	 
+     }
+
+     function ChangeFieldByName(name) {
+        document.userInfo.username.value = name;
+    	 
+     }
+     
+     function ChangeFieldById(name) {
+        document.getElementById("username").value = name;
+    	 
+     }
+     
+     function ChangeFieldByPosition(name) {
+        document.forms[0].elements[0].value = name;
+    	 
+     }     
+          
+     function validateInput()
+     {
+    	var status = document.userInfo.signin_option; 
+    	
+        var pwd = document.userInfo.password;
+        if (pwd.value == "")
+        {
+           //alert ("Password must be entered");
+           document.getElementById("pwd_msg").innerHTML = "Password must be entered";
+           document.userInfo.password.focus();
+           return (false);
+        }
+        else
+           document.getElementById("pwd_msg").innerHTML = "";
+        
+        if (status.value == "new_user")
+        {
+        	var cofm_pwd = document.userInfo.cofm_password;
+        	if (cofm_pwd.value == "")
+        	{ 
+        		document.getElementById("cofmpwd_msg").innerHTML = "Password must be confirmed";
+        		document.userInfo.cofm_password.focus();
+        		return (false);
+        	}
+        	if (cofm_pwd.value != pwd.value)
+        	{
+        		document.getElementById("cofmpwd_msg").innerHTML = "Password and confirmation must match";
+        		document.userInfo.cofm_password.focus();
+        		return (false);        		
+        	}
+        	else
+        		document.getElementById("cofmpwd_msg").innerHTML = "";
+       	}
+        
+        
+        // reset signin_option to default "return_user"
+        document.userInfo.signin_option.value = "return_user";        
+     }
+     
+     function update_screen(signin_as)
+     {
+         document.userInfo.signin_option.value = signin_as;
+         alert(document.userInfo.signin_option.value)
+         if (signin_as == "return_user")
+        	document.getElementById("cofm_row").style.visibility = "hidden";
+         else
+    	 	document.getElementById("cofm_row").style.visibility = "visible";    	
+     }
+     
+     // end script hiding -->
+   </script>
+   
+</head>
+
+<body onload="setFocus()">
+  <center>
+    <h2>Form and JS</h2>  
+  </center>
+  
+  <br />
+  
+  <center>
+  
+  <form action="http://localhost/cs4640/php/simple-form-handler.php" name="userInfo" onSubmit="return (validateInput())">
+    <table>
+      <tr>
+        <td width="40%" align="right"><label>User name: </label></td>
+        <td><input type="text" name="username" id="username" value="user name" /></td> 
+      </tr>
+      <tr>
+        <td width="40%" align="right"><label>Password: </label></td>
+        <td><input type="text" name="password" value="" /><br />
+          <span id="pwd_msg" style="color:red; font-style:italic; font-size:80%"></span>
+        </td>
+        <td><input type="button" name="btn_signin" value="New user" onClick="update_screen('new_user')" /></td>        
+      </tr>
+      <tr id="cofm_row" style="visibility:hidden">
+        <td width="40%" align="right"><label>Confirm password:</label></td>
+        <td><input type="text" name="cofm_password" value="" /><br />
+          <span id="cofmpwd_msg" style="color:red; font-style:italic; font-size:80%"></span>
+        </td>        
+      </tr> 
+
+    </table>
+    <input type="submit" value="Submit" /> &nbsp;&nbsp;&nbsp;&nbsp; 
+    <input type="reset" value="Reset" />
+
+    <input type="hidden" name="signin_option" value="return_user" />
+        
+  </form>
+  
+    <br />
+  
+    <table cellpadding=5 cellspacing=2 >
+      <tr>
+        <td>Event handling: <code><font color="red">onmouseover</font></code> &nbsp; on links</td>
+        <td><a href="updatefield.html" onmouseover="ChangeFieldByName('Jack')"
+            onmouseout="ChangeFieldByName('name')">
+            Jack</a>
+        </td>  
+        <td><a href="updatefield.html" onmouseover="ChangeFieldById('Mary special agent')"
+            onmouseout="ChangeFieldById('some default value')">      
+            Mary</a>
+        </td>
+        <td><a href="updatefield.html" onmouseover="ChangeFieldByPosition('Mike awesome')"
+            onmouseout="ChangeFieldByPosition('devault value')">      
+            Mike</a>
+        </td> 
+      </tr>
+      <tr>
+        <td>Event handling: <code><font color="red">onclick</font></code> &nbsp; on buttons</td>
+        <td><button onclick="ChangeFieldByName('Jack')">Jack</button></td>  
+        <td><button onclick="ChangeFieldById('Mary')">Mary</button></td>
+        <td><button onclick="ChangeFieldByPosition('Mike')">Mike</button></td> 
+      </tr>
+    </table>
+    
+    <br />
+    
+  </center>
+ 
+</body>
+</html>
+
+
