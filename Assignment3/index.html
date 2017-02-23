@@ -1,0 +1,144 @@
+<!doctype html>
+<!--
+Author: Jason Ellington, Madeline Watkins
+-->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 2</title>
+</head>
+
+<body>
+
+    <h1>Questions!</h1>
+    <p>Jason Ellington, Madeline Watkins</p>
+    <p>This page allows you to create different types of questions. Enjoy!</p>
+    <p>Select Random for a random question and answer!</p>
+
+    <h2>Choose Question Type:</h2>
+        <select id="selectQuestion" onchange="update_screen()">
+            <option value="ct"> -Choose Type- </option>
+            <option value="multiple-choice">Multiple Choice</option>
+            <option value="true-false">True/False</option>
+            <option value="short-answer">Short Answer</option>
+        </select>	
+ 
+        <form id="multiple-choice" style="display:none" method="post" action="formHandler.php" onSubmit="validateInput()">
+            MC Question:
+            <input type="text" id="mcQuestion" name="mcQuestion" />
+            	<ul class="answers">
+                    Answer 1:
+                    <input type="text" name="MCa" value="" id="MCa"/>
+                    <br/> Answer 2:
+                    <input type="text" name="MCb" value="" id="MCb"/>
+                    <br/> Answer 3:
+                    <input type="text" name="MCc" value="" id="MCc"/>
+                    <br/> Answer 4:
+                    <input type="text" name="MCd" value="" id="MCd"/>
+                    <br/>
+                </ul>
+               <button type="submit" value="Submit" onclick="validateInput()">Submit</button>
+                <button type="reset"  value="Reset" onclick="reset()">Clear</button>
+                <button type="random"  value="random" onclick="random()">Random</button>
+        </form>
+
+            <form id="true-false" style="display:none" method="post" action="formHandler.php" onSubmit="validateInput()">
+                T/F Question:
+                <input type="text" id="tfQuestion" name="tfQuestion" />
+                <ul class="answers">
+                    Answer:
+                    <input type="text" name="TF" value="" id="TF"/>
+                </ul>
+                <button type="submit" value="Submit" onclick="validateInput()">Submit</button>
+                <button type="reset"  value="Reset" onclick="reset()">Clear</button>
+                <button type="random"  value="random" onclick="random()">Random</button>
+            </form>
+
+            <form id="short-answer" style="display:none" method="post" action="formHandler.php" onSubmit="validateInput()">
+                SA Question:
+                <input type="text" id="saQuestion" name="saQuestion" /> 
+                <br/>
+                Answer:
+                <textarea rows="4" name="saAnswer" id="saAnswer"></textarea>
+                <br/>
+                <button type="submit" value="Submit" onclick="validateInput()">Submit</button>
+                <button type="reset"  value="Reset" onclick="reset()">Clear</button>
+                <button type="random"  value="Random" onclick="random()">Random</button>
+            </form>
+
+
+    <script>
+        function update_screen()
+     {
+     	var selected_value = document.getElementById("selectQuestion").value;
+        if (selected_value == "multiple-choice") {
+        	document.getElementById("multiple-choice").style.display = "block";
+        	document.getElementById("true-false").style.display = "none";
+        	document.getElementById("short-answer").style.display = "none";
+        } else if (selected_value == "true-false") {
+    	 	document.getElementById("true-false").style.display = "block";
+        	document.getElementById("multiple-choice").style.display = "none";
+        	document.getElementById("short-answer").style.display = "none";
+    	} else if (selected_value == "short-answer") {
+    	 	document.getElementById("short-answer").style.display = "block"; 
+    	 	document.getElementById("true-false").style.display = "none";
+        	document.getElementById("multiple-choice").style.display = "none";	
+    	 }
+     }
+
+     function reset() {
+     	var selected_value = document.getElementById("selectQuestion").value;
+     	if (selected_value == "multiple-choice") {
+            document.getElementById("MCa").value = "";
+            document.getElementById("MCb").value = "";
+            document.getElementById("MCc").value = "";
+            document.getElementById("MCd").value = "";
+            document.getElementById("mcQuestion").value = "";
+        }
+        else if (selected_value == "true-false") {
+            document.getElementById("tfQuestion").value = "";
+            document.getElementById("TF").value = "";
+        }
+        else if (selected_value == "short-answer") {
+            document.getElementById("saQuestion").value = "";
+            document.getElementById("saAnswer").value = "";
+        }
+     }
+
+     function random() {
+        var selected_value = document.getElementById("selectQuestion").value;
+        if (selected_value == "multiple-choice") {
+            document.getElementById("MCa").value = "1820";
+            document.getElementById("MCb").value = "1819";
+            document.getElementById("MCc").value = "1816";
+            document.getElementById("MCd").value = "1817";
+            document.getElementById("mcQuestion").value = "What Year Was UVA Founded?";
+        }
+        else if (selected_value == "true-false") {
+            document.getElementById("tfQuestion").value = "Thomas Jefferson Was the 4th Prsident of the US";
+            document.getElementById("TF").value = "false";
+        }
+        else if (selected_value == "short-answer") {
+            document.getElementById("saQuestion").value = "What is the meaning of life?";
+            document.getElementById("saAnswer").value = "What makes the meaning of life is people, so you try to be good to people immediately around you and in your broader community. So a lot of my projects are about how I can affect the world in the hundreds of millions. Reid Hoffman";
+        }
+     }
+
+     function validateInput() 
+     {
+     	if (selected_value == "multiple-choice" && (document.getElementById("MCa").value == "" || document.getElementById("MCb").value == "" || document.getElementById("MCc").value == "" || document.getElementById("MCd").value == "" ||document.getElementById("mcQuestion").value == "")) {
+                alert("Please fill out all boxes!");
+        }
+        else if (selected_value == "true-false" && (document.getElementById("tfQuestion").value == "" || document.getElementById("TF").value == "")) {
+                alert("Please fill out all boxes!");
+        }
+        else if (selected_value == "short-answer" && (document.getElementById("saQuestion").value == "" || document.getElementById("saAnswer").value == "")) {
+            alert("Please fill out all boxes!");
+        }
+     }
+    </script>
+
+</body>
+
+</html>
