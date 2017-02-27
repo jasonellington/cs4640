@@ -6,7 +6,11 @@
       a:hover
       {
         background-color:white;
-      }       
+      }    
+      button
+      {
+        margin:auto;
+      }   
     </style>
  
     <script type="text/javascript">
@@ -143,6 +147,7 @@
             alert("Please fill out all boxes!");
         }
      }
+
     </script>
    
 
@@ -155,20 +160,20 @@
 <?php
    
    // retrieve data from the form submission
-   $project_scores = extract_data();      
+   $questions = extract_data();      
    // print_array($project_scores);
 
    // prepare data to be written to file
    $data = "";
-   while ($curr = each($project_scores)) 
+   while ($curr = each($questions)) 
    {
       $k = $curr["key"];
       $v = $curr["value"];
-      
+
       if (!empty($data))
          $data = $data.",";
       
-      $data = (string)$data.(string)$v;     
+      $data = (string)$data.(string)$v;    
    }
    
    # specify a path, using a file system, not a URL
@@ -176,7 +181,7 @@
    # [local]     /XAMPP/htdocs/<em>your-project</em>/data/filename.txt
    
    
-   $filename = "/Applications/XAMPP/htdocs/cs4640/inClass/data/test-data.txt";    
+   $filename = "/Applications/XAMPP/htdocs/Assignment-3/test-data.txt";    
    
    // if there is nothing, don't write it 
    if (!empty($data))
@@ -192,12 +197,8 @@
 ?>
       <table border="1" align="center" cellpadding="3" width="20%">
         <tr>
-          <th>project1</th>
-          <th>project2</th>
-          <th>project3</th>
-          <th>project4</th>
-          <th>project5</th>
-          <th>project6</th>          
+          <th>Question</th>
+          <th>Answer(s)</th>       
         </tr>
 <?php  
       while ($curr_line = each($file_data))    // each value of a $data array is a line from the file
@@ -207,12 +208,12 @@
          <tr> 
 <?php        
          // to use individual scores, split the value 
-         $splitted_scores = split("\,", $v_line);
-         while ($curr_prj = each($splitted_scores))
+         $splitted_answers = split("\,", $v_line);
+         while ($curr_q = each($splitted_answers))
          {
-            $v_prj = $curr_prj["value"];      // each project score value
-            if (!empty($v_prj))
-               echo "<td align='center'>$v_prj</td>";
+            $v_q = $curr_q["value"];      // each project score value
+            if (!empty($v_q))
+               echo "<td align='center'>$v_q</td>";
          }    
 ?>
          </tr>
@@ -221,8 +222,14 @@
 ?>   
       </table>
 <?php
-   }
-?>      
+  }
+?> 
+
+<div>
+  <button type="submit" id="Confirm" onclick="validateInput()">Confirm</button>
+  <button type="submit" id="Edit" onclick="">Edit</button>
+</div>
+
 </body>
 </html>
 
@@ -235,46 +242,15 @@
     */
    function extract_data()
    {
-      $data = array();
-    $project_scores = array();
+    $data = array();
 
       // To retrieve all param-value pairs from a post object
-      foreach ($_POST as $key => $val)
+    foreach ($_POST as $key => $val)
       {
          $data[$key] = $val;      // record all form data to an array
       }
-
-      $score = 0;
-      $total = 1;      // avoid divided by 0 exception
-   
-      // itearate a data array, access scores and totals for each project,
-      // convert raw scores to percentages (which are used to determine the lowest project score)
     reset($data);
-      while ($curr = each($data))
-      {
-         $k = $curr["key"];
-         $v = $curr["value"];
-
-         // strpos(string, substring) -- return index or position of the substring in string
-         //                              otherwise, return False if not found
-         if (strpos($k, "prj") >= 0)
-         {
-            if (strpos($k, "_total"))
-            {
-        $total = $v;
-        $score = ($score * 100) / $total ;  // percentage
-        $project_scores[$k] = $score;     // put percentage in array (final score for each project)
-      }
-      else
-      {
-        $score = $v;
-      }
-         }
-         else
-            echo "strpos = false";
-      }
-    // print_array($project_scores);
-    return $project_scores;
+    return $data;
    }   
    
    function write_to_file($filename, $data)
@@ -285,7 +261,7 @@
 //          echo "File exists";
       
       $file = fopen($filename, "a");      // if the file doesn't exist, create a new file
-      chmod($filename, 0775);             // set permission. 
+      // chmod($filename, 0775);             // set permission. 
                                           // Note: consider chmod 755 here but 777 when manually creating a file
                                           //    who is the owner?
       fputs($file, $data."\n");
@@ -304,97 +280,5 @@
       fclose($file);
       return $data_array;
    }
-   
-   
-   #####################################################
-   ####### the following code is from in-class 3 #######
-   
-   function compute_score()  
-   {
-      $data = array();
-      $project_scores = array();
-      
-      // To retrieve all param-value pairs from a post object
-      foreach ($_POST as $key => $val)
-      {
-         $data[$key] = $val;      // record all form data to an array      
-      }
-   //   echo "<br />Initial data <br />";
-   //   print_array($data);
-      
-      $score = 0;
-      $total = 1;      // avoid divided by 0 exception
-     
-      // itearate a data array, access scores and totals for each project, 
-      // convert raw scores to percentages (which are used to determine the lowest project score)
-      reset($data);
-      while ($curr = each($data))
-      {
-         $k = $curr["key"];
-         $v = $curr["value"];
-      
-         // strpos(string, substring) -- return index or position of the substring in string
-         //                              otherwise, return False if not found
-         if (strpos($k, "prj") >= 0)
-         {
-            if (strpos($k, "_total"))
-            {
-               $total = $v;
-               $score = ($score * 100) / $total ;  // percentage
-               $project_scores[$k] = $score;     // put percentage in array (final score for each project) 
-            }  
-            else
-            {
-             $score = $v;         
-            }
-         }
-         else 
-            echo "strpos = false";
-      }
-   //    echo "<br />Convert scores to percentages <br />";
-   //    print_array($project_scores);
-   
-      $project_avg = "";
-      if (!empty($_POST['drop_project']))
-      {
-         $is_drop_project = $_POST['drop_project'];
-         if ($is_drop_project == "yes")
-            $project_avg = compute_projects_score($project_scores, $is_drop_project) / 5;
-         else 
-            $project_avg = compute_projects_score($project_scores, $is_drop_project) / 6;
-      }
-      
-      return $project_avg;
-   }
-   
-   function print_array($arr)
-   {
-      while ($curr = each($arr)):
-         $k = $curr["key"];
-         $v = $curr["value"];
-         //echo "key is $k and value is $v <br/>";
-         echo "[ $k => $v ] <br />";
-         
-      endwhile;
-   }
-    
-   function get_lowest_score($arr)
-   {
-      $lowest_score = 0;
-      if (!empty($arr))
-         $lowest_score = min(array_values($arr));      
-
-      return $lowest_score;   
-   }
-   
-   function compute_projects_score($scores, $is_drop_lowest)
-   {
-      $project_score = 0;
-      if ($is_drop_lowest == "yes" && !empty($scores))
-         $project_score = array_sum($scores) - get_lowest_score($scores);
-      else 
-         $project_score = array_sum($scores);
-      return $project_score;         
-   }
-
 ?>
+
