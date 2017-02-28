@@ -1,7 +1,35 @@
-<!doctype html>
+<?php
+session_start();
+
+if (isset($_POST["mcQuestion"])) {
+  session_unset();
+  $_SESSION["mcQuestion"] = $_POST["mcQuestion"];
+  $_SESSION["MCa"] = $_POST["MCa"];
+  $_SESSION["MCb"] = $_POST["MCb"];
+  $_SESSION["MCc"] = $_POST["MCc"];
+  $_SESSION["MCd"] = $_POST["MCd"];
+}
+
+if (isset($_POST["tfQuestion"])) {
+  session_unset();
+  $_SESSION["tfQuestion"] = $_POST["tfQuestion"];
+  $_SESSION["TF"] = $_POST["TF"];
+}
+
+if (isset($_POST["saQuestion"])) {
+  session_unset();
+  $_SESSION["saQuestion"] = $_POST["saQuestion"];
+  $_SESSION["saAnswer"] = $_POST["saAnswer"];
+}
+
+
+
+
+?>
+<!doctype HTML>
 <html>
 <head>
-  <title>Inclass exercise 3: PHP</title>
+  <title>Assignment 3: PHP</title>
     <style>
       a:hover
       {
@@ -23,7 +51,7 @@
 
 <body onload="setFocus()">
   <center>
-  <h2>Function and form handling in PHP</h2>
+  <h2>Assignment 3</h2>
   <h2><font color="green">Jason Ellington - jte4hm</font></h2>
   <h2><font color="green">Madeline Watkins - mlw5ea</font></h2>
   <h2>Choose Question Type:</h2>
@@ -195,8 +223,8 @@
    # [local]     /XAMPP/htdocs/<em>your-project</em>/data/filename.txt
    
    
-   $filename = "/Applications/XAMPP/htdocs/Assignment-3/test-data.txt";    
-   $datafile = "/Applications/XAMPP/htdocs/Assignment-3/actual-data.txt";
+   $filename = "/Applications/XAMPP/htdocs/cs4640/Assignment3/test-data.txt";    
+   $datafile = "/Applications/XAMPP/htdocs/cs4640/Assignment3/actual-data.txt";
    
    // if there is nothing, don't write it 
    if (!empty($data))
@@ -242,8 +270,12 @@
 
 <form action="dataForm.php" method="post">
   <button type="submit" style="display:block" id="confirm" onclick="validateInput()">Confirm</button>
+</form>
+
+<form action="assignment3.php" method="post">
   <button type="submit" style="display:block" id="edit" onclick="reset()">Edit</button>
 </form>
+
 
 
 </body>
@@ -311,4 +343,3 @@
       return $data_array;
    }
 ?>
-

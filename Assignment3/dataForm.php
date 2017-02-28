@@ -3,11 +3,20 @@
    <hr />   
     
 <?php
-	
-	$questions = extract_data(); 
+	session_start();
+  if (isset($_SESSION["mcQuestion"])) {
+  }
+
+  if (isset($_SESSION["tfQuestion"])) {
+  }
+
+  if (isset($_SESSION["saQuestion"])) {
+
+  }
+
 
 	$data = "";
-   while ($curr = each($questions)) 
+   while ($curr = each($_SESSION)) 
    {
       $k = $curr["key"];
       $v = $curr["value"];
@@ -18,11 +27,13 @@
       $data = (string)$data.(string)$v;    
    }
 
-   	$datafile = "/Applications/XAMPP/htdocs/Assignment-3/actual-data.txt";
+    $filename = "/Applications/XAMPP/htdocs/cs4640/Assignment3/test-data.txt";
+
+   	$datafile = "/Applications/XAMPP/htdocs/cs4640/Assignment3/actual-data.txt";
 
    	write_to_datafile($datafile, $data);
    // read from file and display data in a table
-   $file_data = read_file($filename);
+   $file_data = readfile($filename);
    if (!empty($file_data))
    {
 ?>
