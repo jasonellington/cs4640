@@ -240,7 +240,7 @@
   }
 ?> 
 
-<form action="assignment3.php" method="post">
+<form action="dataForm.php" method="post">
   <button type="submit" style="display:block" id="confirm" onclick="validateInput()">Confirm</button>
   <button type="submit" style="display:block" id="edit" onclick="reset()">Edit</button>
 </form>
@@ -248,13 +248,6 @@
 
 </body>
 </html>
-
-<?php
-  if (isset($_POST['confirm']))
-  {
-    write_to_datafile($datafile, $data);
-  }
-?>
 
 <?php   
 
