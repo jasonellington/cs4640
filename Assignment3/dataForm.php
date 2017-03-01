@@ -4,15 +4,26 @@
     
 <?php
 	session_start();
-  if (isset($_SESSION["mcQuestion"])) {
-  }
+  if (isset($_POST["mcQuestion"])) {
+  session_unset();
+  $_SESSION["mcQuestion"] = $_POST["mcQuestion"];
+  $_SESSION["MCa"] = $_POST["MCa"];
+  $_SESSION["MCb"] = $_POST["MCb"];
+  $_SESSION["MCc"] = $_POST["MCc"];
+  $_SESSION["MCd"] = $_POST["MCd"];
+}
 
-  if (isset($_SESSION["tfQuestion"])) {
-  }
+if (isset($_POST["tfQuestion"])) {
+  session_unset();
+  $_SESSION["tfQuestion"] = $_POST["tfQuestion"];
+  $_SESSION["TF"] = $_POST["TF"];
+}
 
-  if (isset($_SESSION["saQuestion"])) {
-
-  }
+if (isset($_POST["saQuestion"])) {
+  session_unset();
+  $_SESSION["saQuestion"] = $_POST["saQuestion"];
+  $_SESSION["saAnswer"] = $_POST["saAnswer"];
+}
 
 
 	$data = "";
@@ -30,38 +41,43 @@
     $filename = "/Applications/XAMPP/htdocs/cs4640/Assignment3/test-data.txt";
 
    	$datafile = "/Applications/XAMPP/htdocs/cs4640/Assignment3/actual-data.txt";
-
+    if (!empty($data)) {
    	write_to_datafile($datafile, $data);
+   }
+   ?>
+   <hr />   
+    
+<?php
    // read from file and display data in a table
-   $file_data = readfile($filename);
+   $file_data = readfile($datafile);
    if (!empty($file_data))
    {
+    $questions = explode(",", $file_data);
 ?>
-      <table id="data" style="display:none" border="1" align="center" cellpadding="3" width="20%">
+      <table id="data" style="display:block" border="1" align="center" cellpadding="3" width="20%">
         <tr>
           <th>Question</th>
           <th>Answer(s)</th>       
         </tr>
 <?php  
-      while ($curr_line = each($file_data))    // each value of a $data array is a line from the file
-      {
-         $v_line = $curr_line["value"];        // each value is a string of scores separated by a comma
+
+         while($curr=each($questions))
+         {
+         $v_line = array_slice($questions, 1);        
 ?>
          <tr> 
 <?php        
-         // to use individual scores, split the value 
-         $splitted_answers = split("\,", $v_line);
-         while ($curr_q = each($splitted_answers))
+         while ($curr_q = each($v_line))
          {
-            $v_q = $curr_q["value"];      // each project score value
-            if (!empty($v_q))
-               echo "<td align='center'>$v_q</td>";
+            $v_q = $curr_q;      // each project score value
+            //if (!empty($v_q))
+               //echo "<td align='center'>$v_q</td>";
          }    
 ?>
-         </tr>
-<?php             
+         </tr>  
+        <?php
       }
-?>   
+      ?>
       </table>
 <?php
   }
@@ -80,16 +96,12 @@
       {
          $data[$key] = $val;      // record all form data to an array
       }
-    reset($data);
+    // reset($data);
     return $data;
    }  
 
    function write_to_datafile($filename, $data)
    {
-//       if (!file_exists($filename))
-//          echo "File does not exist";
-//       else
-//          echo "File exists";
       
       $file = fopen($filename, "a");      // if the file doesn't exist, create a new file
       // chmod($filename, 0775);             // set permission. 
@@ -99,4 +111,16 @@
       fclose($file);
    }
 
+   function read_file($filename)
+   {
+      $file = fopen($filename, "r");      // r: read only
+      $data_array = "";
+
+      while (!feof($file)) 
+      {
+         $data_array[] = fgets($file);
+      }
+      fclose($file);
+      return $data_array;
+   }
 ?>
